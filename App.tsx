@@ -13,11 +13,15 @@ import { Loading } from "./src/components/Loading";
 
 import { CartContextProvider } from "./src/contexts/CartContext";
 import { OneSignal } from "react-native-onesignal";
+import { tagUserEmailCreate } from "./src/notifications/notificationsTags";
 
 OneSignal.initialize("22712f8b-43e7-4e1b-8601-18f333a8e138");
+OneSignal.Notifications.requestPermission(true);
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
+
+  tagUserEmailCreate("raphael@email.com");
 
   return (
     <NativeBaseProvider theme={THEME}>
