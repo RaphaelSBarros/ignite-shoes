@@ -12,8 +12,9 @@ import { THEME } from "./src/theme";
 import { Loading } from "./src/components/Loading";
 
 import { CartContextProvider } from "./src/contexts/CartContext";
-import { OneSignal } from "react-native-onesignal";
+import { NotificationClickEvent, OneSignal } from "react-native-onesignal";
 import { tagUserInfoCreate } from "./src/notifications/notificationsTags";
+import { useEffect } from "react";
 
 OneSignal.initialize("22712f8b-43e7-4e1b-8601-18f333a8e138");
 OneSignal.Notifications.requestPermission(true);
@@ -22,6 +23,20 @@ export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
   tagUserInfoCreate();
+
+  useEffect(() => {
+    const handleNotificationClick = (event: NotificationClickEvent): void => {
+      console.log("Notificação aberta!");
+    };
+
+    OneSignal.Notifications.addEventListener("click", handleNotificationClick);
+
+    return () =>
+      OneSignal.Notifications.removeEventListener(
+        "click",
+        handleNotificationClick
+      );
+  }, []);
 
   return (
     <NativeBaseProvider theme={THEME}>
