@@ -10,6 +10,20 @@ import {
 } from "react-native-onesignal";
 import { Notification } from "../components/Notification";
 
+const linking = {
+  prefixes: ["com.Me.igniteshoesapp://"],
+  config: {
+    screens: {
+      details: {
+        path: "/details/:productId",
+        parse: {
+          productd: (productId: string) => productId,
+        },
+      },
+    },
+  },
+};
+
 export function Routes() {
   const [notification, setNotification] = useState<OSNotification>();
 
@@ -38,7 +52,7 @@ export function Routes() {
   }, []);
 
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={theme} linking={linking}>
       <AppRoutes />
 
       {notification?.title && (
