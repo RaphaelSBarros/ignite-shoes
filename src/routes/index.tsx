@@ -11,7 +11,7 @@ import {
 import { Notification } from "../components/Notification";
 
 const linking = {
-  prefixes: ["com.Me.igniteshoesapp://"],
+  prefixes: ["com.me.igniteshoesapp://", "com.Me.igniteshoesapp://"],
   config: {
     screens: {
       details: {
