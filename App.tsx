@@ -26,7 +26,14 @@ export default function App() {
 
   useEffect(() => {
     const handleNotificationClick = (event: NotificationClickEvent): void => {
-      console.log("Notificação aberta!");
+      const { actionId } = event.result;
+
+      if (actionId == "1") {
+        return console.log("Ver todos");
+      }
+      if (actionId == "2") {
+        return console.log("Ver pedido");
+      }
     };
 
     OneSignal.Notifications.addEventListener("click", handleNotificationClick);
